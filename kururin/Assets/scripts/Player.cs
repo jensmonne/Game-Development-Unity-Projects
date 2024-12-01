@@ -11,7 +11,9 @@ public class Player : MonoBehaviour
     
     void Start()
     {
+        gameScript = FindObjectOfType<Game>();
         _rigidBody = GetComponent<Rigidbody2D>();
+        gameScript.health = 3;
     }
 
     private void FixedUpdate()

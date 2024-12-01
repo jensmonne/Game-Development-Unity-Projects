@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class Game : MonoBehaviour
 {
 
-    [SerializeField] private int health = 3;
+    public int health = 3;
 
     [SerializeField] private int currentLevel;
     
@@ -12,9 +12,20 @@ public class Game : MonoBehaviour
     
     public bool fSignalActive;
     
-    void Start()
+    private static Game Instance;
+    
+    private void Awake()
     {
-        currentLevel = PlayerPrefs.GetInt("currentLevel", 0);
+        // Singleton pattern
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Prevent destruction on scene change
+        }
+        else
+        {
+            Destroy(gameObject); // Ensure only one GameManager exists
+        }
     }
 
     void Update()
@@ -32,16 +43,15 @@ public class Game : MonoBehaviour
 
         if (fSignalActive)
         {
-            currentLevel += 1;
+            currentLevel ++;
             fSignalActive = false;
-            PlayerPrefs.SetInt("currentLevel", currentLevel);
-            PlayerPrefs.Save();
             if (currentLevel == 1)
             {
                 SceneManager.LoadScene("Level_2");
             }
             else if (currentLevel == 2)
             {
+                currentLevel = 0;
                 SceneManager.LoadScene("WinScreen");
             }
         }

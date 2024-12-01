@@ -15,12 +15,6 @@ public class Utilities : MonoBehaviour
         Debug.Log("Quit");
     }
 
-    public void Continue()
-    {
-        PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene("LevelSelect");
-    }
-
     public void MainMenu()
     {
         SceneManager.LoadScene("Menu");
@@ -31,8 +25,8 @@ public class Utilities : MonoBehaviour
         SceneManager.LoadScene("Level_1");
     }
 
-    // public void Level_2()
-    // {
-    //     SceneManager.LoadScene("Level_2");
-    // }
+    public void Level_2()
+    {
+        SceneManager.LoadScene("Level_2");
+    }
 }

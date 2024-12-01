@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,13 +7,15 @@ public class Game : MonoBehaviour
 
     public int health = 3;
 
-    [SerializeField] private int currentLevel;
+    public int currentLevel;
     
     public bool hSignalActive;
     
     public bool fSignalActive;
     
     private static Game Instance;
+    
+    public TMP_Text healthText;
     
     private void Awake()
     {
@@ -38,6 +41,7 @@ public class Game : MonoBehaviour
         
         if (health <= 0)
         {
+            health = 3;
             SceneManager.LoadScene("GameOver");
         }
 
@@ -54,6 +58,23 @@ public class Game : MonoBehaviour
                 currentLevel = 0;
                 SceneManager.LoadScene("WinScreen");
             }
+        }
+
+        if (healthText != null)
+        {
+            healthText.text = "Health: " + health;
+        }
+        else
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3)
+            {
+                healthText = GameObject.Find("HP").GetComponent<TMP_Text>();
+            }
+        }
+        
+        if (SceneManager.GetActiveScene().buildIndex == 4 || SceneManager.GetActiveScene().buildIndex == 5)
+        {
+            currentLevel = 0;
         }
     }
 }

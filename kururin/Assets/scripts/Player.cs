@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -77,6 +78,10 @@ public class Player : MonoBehaviour
 
             if (collision.gameObject.CompareTag("Finish"))
             {
+                if (SceneManager.GetActiveScene().buildIndex == 3 && gameScript.currentLevel == 0)
+                {
+                    gameScript.currentLevel ++;
+                }
                 gameScript.fSignalActive = true;
             }
         }

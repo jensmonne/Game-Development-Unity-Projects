@@ -1,1 +1,1 @@
-My space clicker game. Made for school assignment!
+My Games made in 3 weeks. Made for school assignments and for fun!
